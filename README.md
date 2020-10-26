@@ -17,17 +17,17 @@ Avro file schema example:
 	}
 **Requirements**
 
-* Push code and any supplementary documentation (if any) to a ​**GitHub** repository.
-* Adhere to the best practices of software development (e.g.SOLID,type safety, code readability, testability, ...).
+* Push code and any supplementary documentation (if any) to a ​**GitHub** repository. --ЩЛ
+* Adhere to the best practices of software development (e.g.SOLID,type safety, code readability, testability, ...). --partially
 * A candidate is expected to be able to present the solution, explain it's different parts and their configuration, and demonstrate it in real-time using its GCP account and the GCP Free Tier:
-https://cloud.google.com/free
+https://cloud.google.com/free --I'll try
 
 **Optional requirements (tasks)**
 
-* enlarge the schema with more fields of different types.
-* write data into different BigQuery tables in parallel;
-* gracefully handle all possible errors and exceptions in code including when using GCP Java SDKs;
-* investigate and present possible options for productionizing the solution from the point of view of scalability, availability, and performance.
+* enlarge the schema with more fields of different types. --did not have enough time
+* write data into different BigQuery tables in parallel; -- OK
+* gracefully handle all possible errors and exceptions in code including when using GCP Java SDKs; --OK possible
+* investigate and present possible options for productionizing the solution from the point of view of scalability, availability, and performance. --I do not have the necessary experience for this 
 
 1. Create GCP project
     https://cloud.google.com/resource-manager/docs/creating-managing-projects#gcloud
