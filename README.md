@@ -38,6 +38,9 @@ https://cloud.google.com/free --I'll try
     https://cloud.google.com/storage/docs/creating-buckets#storage-create-bucket-gsutil
 4. create Pub/Sub topic
     https://cloud.google.com/pubsub/docs/admin
+    add a notification configuration to your GS bucket that sends notifications for
+    OBJECT_FINALIZE event type
+    https://cloud.google.com/storage/docs/reporting-changes
 5. Download this project from GitHub :)
     
 6. Compile and deploy project to Cloud Run, copy URL from project Props
