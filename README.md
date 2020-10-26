@@ -50,4 +50,4 @@ https://cloud.google.com/free --I'll try
     https://cloud.google.com/run/docs/logging
 10. Find more docs at https://cloud.google.com/
 
-
+![Project Diagram](RinfTech Project Diagram.png)
