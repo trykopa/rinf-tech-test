@@ -39,23 +39,35 @@ public class GcsFileProcessor implements FileProcessor{
                     Field.of("address", StandardSQLTypeName.STRING));
 
 
-    public GcsFileProcessor(AvroRecordToDbAsyncProcessor arp
-            , RecordToDbProcessor rp
-                            ) {
+    public GcsFileProcessor(AvroRecordToDbAsyncProcessor arp , RecordToDbProcessor rp) {
         this.arp = arp;
         this.rp = rp;
     }
 
     @Override
-    public void processFile(PubSubBody body) {
+    public void processFile(PubSubBody body){
         String bucket = body.getMessage().getAttributes().get("bucketId");
         String newFile = body.getMessage().getAttributes().get("objectId");
         String gcsPath = "gs://" + bucket + "/" + newFile;
         Map <String, Schema> schemaMap = Map.of(fullTable, fullSchema, shortTable, shortSchema);
-        log.info("Start load data to tables by Async method");
-        schemaMap.forEach((t,s) -> rp.recordProcessor(gcsPath, t, dbName, s));
-        log.info("-------------------single thread--------------------");
-        schemaMap.forEach((t,s) -> arp.asyncProcess(gcsPath, t, dbName, s));
+        log.info("Start load data to tables by single thread method");
+        schemaMap.forEach((t,s) -> {
+            try {
+                rp.recordProcessor(gcsPath, t, dbName, s);
+            } catch (InterruptedException e) {
+                log.error("Error during dingle thread run", e);
+                e.printStackTrace();
+            }
+        });
+        log.info("-------------------async method--------------------");
+        schemaMap.forEach((t,s) -> {
+            try {
+                arp.asyncProcess(gcsPath, t, dbName, s);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                log.error("Error during async method run", e);
+            }
+        });
         log.info("Finish load data to tables");
     }
 }

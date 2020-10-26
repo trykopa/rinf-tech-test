@@ -39,11 +39,13 @@ public class EventController {
       msg = "TEST OK";
       try {
         fileProcessor.processFile(body);
-      } catch (NullPointerException npe) {
+      } catch (NullPointerException | InterruptedException npe) {
         npe.printStackTrace();
+        return new ResponseEntity <>(msg , HttpStatus.BAD_REQUEST);
       }
     } else {
       msg = "TEST FILED, not avro file";
+      return new ResponseEntity <>(msg , HttpStatus.BAD_REQUEST);
     }
     log.info(msg);
     return new ResponseEntity <>(msg , HttpStatus.OK);

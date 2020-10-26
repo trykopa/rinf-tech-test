@@ -21,10 +21,9 @@ public class AvroRecordToDbAsyncProcessor {
     }
 
     @Async
-    public CompletableFuture <Boolean> asyncProcess(String fileName , String table , String dataSet, Schema schema){
+    public CompletableFuture <Boolean> asyncProcess(String fileName , String table , String dataSet, Schema schema) throws InterruptedException {
         log.info("Process Avro file {} {}", fileName, table );
-        boolean jobDone = false;
-        try {
+        boolean jobDone;
             TableId tableId = TableId.of(dataSet, table);
             LoadJobConfiguration loadConfig =
                     LoadJobConfiguration.newBuilder(tableId, fileName)
@@ -43,9 +42,6 @@ public class AvroRecordToDbAsyncProcessor {
                                 + job.getStatus().getError());
             }
             jobDone = job.isDone();
-        } catch (BigQueryException | InterruptedException e) {
-            log.error("Column not added during load append \n" , e);
-        }
         return CompletableFuture.completedFuture(jobDone);
     }
 }
