@@ -3,11 +3,13 @@ package com.google.ssadm.rinftechtest.service;
 import com.google.cloud.bigquery.Field;
 import com.google.cloud.bigquery.Schema;
 import com.google.cloud.bigquery.StandardSQLTypeName;
-import com.google.ssadm.rinftechtest.eventpojos.PubSubBody;
+import com.google.ssadm.rinftechtest.entity.Client;
+import com.google.ssadm.rinftechtest.entity.PubSubBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.apache.avro.message.SchemaStore;
 
 import java.util.Map;
 
@@ -51,18 +53,18 @@ public class GcsFileProcessor implements FileProcessor{
         String gcsPath = "gs://" + bucket + "/" + newFile;
         Map <String, Schema> schemaMap = Map.of(fullTable, fullSchema, shortTable, shortSchema);
         log.info("Start load data to tables by single thread method");
-        schemaMap.forEach((t,s) -> {
+        schemaMap.forEach((tableName,schemaName) -> {
             try {
-                rp.recordProcessor(gcsPath, t, dbName, s);
+                rp.recordProcessor(gcsPath, tableName, dbName, schemaName);
             } catch (InterruptedException e) {
                 log.error("Error during dingle thread run", e);
                 e.printStackTrace();
             }
         });
         log.info("-------------------async method--------------------");
-        schemaMap.forEach((t,s) -> {
+        schemaMap.forEach((tableName,schemaName) -> {
             try {
-                arp.asyncProcess(gcsPath, t, dbName, s);
+                arp.asyncProcess(gcsPath, tableName, dbName, schemaName);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 log.error("Error during async method run", e);

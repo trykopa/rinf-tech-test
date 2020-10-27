@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.ssadm.rinftechtest.eventpojos;
+package com.google.ssadm.rinftechtest.entity;
 
 import java.util.Map;
 

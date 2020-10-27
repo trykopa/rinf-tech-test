@@ -1,6 +1,6 @@
-package com.google.ssadm.rinftechtest;
+package com.google.ssadm.rinftechtest.controller;
 
-import com.google.ssadm.rinftechtest.eventpojos.PubSubBody;
+import com.google.ssadm.rinftechtest.entity.PubSubBody;
 import com.google.ssadm.rinftechtest.service.FileProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
