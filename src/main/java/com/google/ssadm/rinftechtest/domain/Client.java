@@ -3,7 +3,7 @@
  * <p>
  * DO NOT EDIT DIRECTLY
  */
-package com.google.ssadm.rinftechtest.entity;
+package com.google.ssadm.rinftechtest.domain;
 
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.BinaryMessageEncoder;

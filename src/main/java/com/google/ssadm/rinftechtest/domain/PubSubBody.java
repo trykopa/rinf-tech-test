@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.ssadm.rinftechtest.entity;
+package com.google.ssadm.rinftechtest.domain;
 
 import java.util.Map;
 
